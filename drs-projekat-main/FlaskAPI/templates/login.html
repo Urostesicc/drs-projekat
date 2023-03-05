@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+        <title>Login</title>
+        <style>
+            body {
+                background-color: #e6dddd;
+                font-family: Arial, sans-serif;
+            }
+
+            .titlecenter {
+                text-align: center;
+            }
+
+            .form-container {
+                width: 450px;
+                margin: auto;
+                border: 1px solid rgb(180, 177, 177);
+                border-radius: 5px;
+                padding: 20px;
+                padding-top: 0px;
+                box-shadow: 0 0 50px #60b2b6;
+            }
+
+            .form-field {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid rgb(180, 177, 177);
+                border-radius: 8px;
+                box-sizing: border-box;
+                margin-bottom: 10px;
+                font-size: 16px;
+            }
+
+            .form-field:hover,
+            .form-field:focus {
+                border: 1px solid #2ec5ca;
+            }
+
+            .form-label {
+                font-size: 20px;
+                margin-bottom: 5px;
+                font-family: "Times New Roman", Arial, monospace;
+                display: block;
+            }
+
+            .sign-in-button {
+                width: 30%;
+                font-size: 17px;
+                background-color: #2ec5ca;
+                color: white;
+                padding: 12px;
+                display: block;
+                margin: auto;
+                margin-top: 7px;
+                margin-bottom: 7px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                box-shadow: 0 0 50px #60b2b6;
+            }
+
+            .sign-in-buttonn {
+                width: 25%;
+                font-size: 17px;
+                background-color: #d14127;
+                color: white;
+                padding: 12px;
+                display: block;
+                margin: auto;
+                margin-top: 7px;
+                margin-bottom: 7px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                box-shadow: 0 0 50px #60b2b6;
+            }
+
+            .sign-in-button:hover {
+                background-color: #2ea6aa;
+            }
+
+            .sign-in-buttonn:hover {
+                background-color: #ce2e12;
+            }
+
+            .links {
+                font-size: 20px;
+                font-family: "Times New Roman", Arial, monospace;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="form-container">
+            <form action="/login" method="post">
+                <h1 class="titlecenter">Ulogujte se na vas nalog</h1>
+                {% if get_flashed_messages() %} {% for message in
+                get_flashed_messages() %}
+                <div
+                    class="alert alert-warning alert-dismissible fade show"
+                    role="alert"
+                >
+                    {{message}}
+                    <a href="{{url_for('registerPage')}}" class="alert-link"
+                        >ovde.</a
+                    >
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                {% endfor %} {% endif %}
+                <label class="form-label" for="email">Email:</label>
+                <input
+                    type="email"
+                    name="login_email"
+                    id="email"
+                    class="form-field"
+                    required
+                />
+
+                <label class="form-label" for="password">Lozinka:</label>
+                <input
+                    type="password"
+                    name="login_password"
+                    id="password"
+                    class="form-field"
+                    required
+                />
+
+                <button type="submit" class="sign-in-button">
+                    Prijavite se
+                </button>
+                <!--dugme za nazad-->
+                <br/>
+                <a href="{{url_for('index')}}"><button class="sign-in-buttonn">Nazad</button></a>
+            </form>
+            <label class="links"
+                ><a href="{{url_for('registerPage')}}"
+                    >Nemate nalog? Registrujte se ovde</a
+                ><br
+            /></label>
+        </div>
+    </body>
+</html>

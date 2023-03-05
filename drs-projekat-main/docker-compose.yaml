@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+    FlaskAPI:
+        image: flaskfront
+        build:
+            context: ./FlaskAPI
+            dockerfile: Dockerfile
+        ports:
+            - "5000:5000"
+    Engine:
+        image: flaskback
+        build:
+            context: ./Engine
+            dockerfile: Dockerfile
+        ports:
+            - "5001:5001"

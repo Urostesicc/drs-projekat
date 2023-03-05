@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+        <title>Document</title>
+    </head>
+
+    <style>
+        body {
+            background-color: #e6dddd;
+            font-family: Arial, sans-serif;
+        }
+
+        .titlecenter {
+            text-align: center;
+        }
+
+        .form-container {
+            width: 450px;
+            margin: auto;
+            border: 1px solid rgb(180, 177, 177);
+            border-radius: 5px;
+            padding: 20px;
+            padding-top: 20px;
+            box-shadow: 0 0 50px #60b2b6;
+        }
+
+        .form-field {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgb(180, 177, 177);
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .form-field:hover,
+        .form-field:focus {
+            border: 1px solid #2ec5ca;
+        }
+
+        .form-label {
+            font-size: 20px;
+            margin-bottom: 5px;
+            font-family: "Times New Roman", Arial, monospace;
+            display: block;
+        }
+
+        .form-button {
+            width: 40%;
+            font-size: 17px;
+            background-color: #2ec5ca;
+            color: white;
+            padding: 12px;
+            display: block;
+            margin: auto;
+            margin-top: 7px;
+            margin-bottom: 7px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 50px #60b2b6;
+        }
+
+        .form-buttonn {
+            width: 8%;
+            font-size: 17px;
+            background-color: #d14127;
+            color: white;
+            padding: 12px;
+            display: block;
+            margin: auto;
+            margin-top: 7px;
+            margin-bottom: 7px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 50px #60b2b6;
+        }
+
+        .form-buttonnn {
+            width: 20%;
+            font-size: 17px;
+            background-color: #2ec5ca;
+            color: white;
+            padding: 12px;
+            display: block;
+            margin: auto;
+            margin-top: 7px;
+            margin-bottom: 7px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 50px #60b2b6;
+        }
+        .form-buttonn:hover {
+            background-color: #ce2e12;
+        }
+
+        .form-buttonnn:hover {
+            background-color: #2ea6aa;
+        }
+
+        .form-button:hover {
+            background-color: #2ea6aa;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 30px;
+            margin-top: 20px;
+        }
+
+        h2 {
+            text-align: center; 
+            font-size: 30px; 
+            margin-top: 20px; 
+        }
+
+        table {
+            margin-left: 25%;
+            text-align: center;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #2ec5ca;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #2ec5ca;
+            color: white;
+        }
+    </style>
+
+    <h1>Uplatite novac</h1>
+    <body>
+        <div class="form-container">
+            {% for message in get_flashed_messages() %}
+            <div
+                class="alert alert-danger d-flex align-items-center"
+                role="alert"
+            >
+                <svg
+                    class="bi flex-shrink-0 me-2"
+                    width="24"
+                    height="24"
+                    role="img"
+                    aria-label="Danger:"
+                >
+                    <use xlink:href="#exclamation-triangle-fill" />
+                </svg>
+                <div>{{ message }}</div>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+            </div>
+            {% endfor %}
+            <form action="/transactionByEmail" method="post">
+                <label class="form-label" for="text">Email primaoca:</label>
+                <input
+                    type="email"
+                    name="email_primaoca"
+                    id=""
+                    class="form-field"
+                    required
+                />
+                <br />
+                <label class="form-label" for="text">Suma:</label>
+                <input
+                    type="number"
+                    name="suma"
+                    class="form-field"
+                    required
+                    id=""
+                />
+                <select name="valuta" id="valuta">
+                    {% for key in cur.keys() %}
+                    <option value="{{key}}">{{key}}</option>
+                    {% endfor %}
+                </select>
+                <br />
+                <button type="submit" class="form-button">Posalji novac</button>
+            </form>
+
+            <form action="/transactionToNonRegistered" method="post">
+                <label class="form-label" for="text"
+                    >Ime i prezime primaoca:</label
+                >
+                <input
+                    type="text"
+                    name="ime-prezime"
+                    id=""
+                    class="form-field"
+                    required
+                />
+                <br />
+                <label class="form-label" for="text">Adresa primaoca:</label>
+                <input
+                    type="text"
+                    name="adresa"
+                    class="form-field"
+                    id=""
+                    required
+                />
+                <br />
+                <label class="form-label" for="text"
+                    >Broj racuna primaoca:</label
+                >
+                <input
+                    type="number"
+                    name="broj-racuna"
+                    class="form-field"
+                    required
+                    id=""
+                />
+                <br />
+                <label class="form-label" for="text">Suma:</label>
+                <input
+                    type="number"
+                    name="suma"
+                    class="form-field"
+                    required
+                    id=""
+                />
+                <select name="valuta" id="valuta">
+                    {% for key in cur.keys() %}
+                    <option value="{{key}}">{{key}}</option>
+                    {% endfor %}
+                </select>
+                <br />
+                <button type="submit" class="form-button">Posalji novac</button>
+            </form>
+        </div>
+        <!--ovde ispod treba da dodje istorija transakcija sa kojom korisnik ima veze-->
+        <h2>Klikom na dugme mozete proveriti istoriju Vasih transakcija</h2>
+        <form action="/getTransactions" method="post">
+            <button type="submit" class="form-buttonnn">Pregledaj istoriju transakcija</button>
+        </form>
+        <br />
+        <a href="{{url_for('index')}}"><button class="form-buttonn">Nazad</button></a>
+    </body>
+</html>

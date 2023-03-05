@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        div {
+            display: flex;
+            justify-content: center;
+            }
+
+        button {
+            padding: 10px 20px;
+            background-color: #2ec5ca;
+            border: 1px solid #2ec5ca;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            }
+        
+
+        button:hover {
+            background-color: #2ea6aa; 
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 30px;
+            margin-top: 20px;
+        }
+
+        h2 {
+            text-align: center; 
+            font-size: 30px; 
+            margin-top: 20px; 
+        }
+
+        table {
+            margin-left: 25%;
+            text-align: center;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #2ec5ca;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #2ec5ca;
+            color: white;
+        }
+
+    </style>
+    <body>
+    <h1>Lista vasih transakcija</h1>
+    <form>
+        <table border="2">
+                <tr>
+                    <th>idTransakcije <input type="submit" value="+" formaction="/sortTransaction?Sort=RASTUCEID" formmethod="post"/><input type="submit" value="-" formaction="/sortTransaction?Sort=OPADAJUCEID" formmethod="post" /></th>
+                    <th>posiljalac <input type="submit" value="+" formaction="/sortTransaction?Sort=RASTUCEPOS" formmethod="post"/> <input type="submit" value="-" formaction="/sortTransaction?Sort=OPADAJUCEPOS" formmethod="post" /> </th>
+                    <th>primalac <input type="submit" value="+" formaction="/sortTransaction?Sort=RASTUCEPRIM" formmethod="post"/> <input type="submit" value="-" formaction="/sortTransaction?Sort=OPADAJUCEPRIM" formmethod="post" /> </th>
+                    <th>suma <input type="submit" value="+" formaction="/sortTransaction?Sort=RASTUCESUMA" formmethod="post"/> <input type="submit" value="-" formaction="/sortTransaction?Sort=OPADAJUCESUMA" formmethod="post" /> </th>
+                    <th>valuta <input type="submit" value="+" formaction="/sortTransaction?Sort=RASTUCEVALUTA" formmethod="post"/> <input type="submit" value="-" formaction="/sortTransaction?Sort=OPADAJUCEVALUTA" formmethod="post" /> </th>
+                    <th>datumVremeTransakcije <input type="submit" value="+" formaction="/sortTransaction?Sort=RASTUCEDATUM" formmethod="post"/> <input type="submit" value="-" formaction="/sortTransaction?Sort=OPADAJUCEDATUM" formmethod="post" /> </th>
+                </tr>
+            {% for user in transactions %}
+                <tr>
+                    <td>{{user.idTransakcije}}</td>
+                    <td>{{user.posiljalac}}</td>
+                    <td>{{user.primalac}}</td>
+                    <td>{{user.suma}}</td>
+                    <td>{{user.valuta}}</td>
+                    <td>{{user.datumVremeTransakcije}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </form>
+    
+    <h2>Klikom na button-e mozete videti samo transakcije gde ste Vi bili posiljalac ili gde ste Vi bili primalac</h2>
+    <div>
+    <form action="/getPosiljalac" method="post">
+        <button type="submit" class="button">Posiljalac</button>
+    </form>
+    <form action="/getPrimalac" method="post">
+        <button type="submit" class="button">Primalac</button>
+    </form>
+        <a href="{{url_for('index')}}"><button style="background-color:brown">Nazad</button></a>
+    </div>
+    </body>
+</html>
